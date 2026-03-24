@@ -8,8 +8,6 @@ UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 
-client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
-
 app = Flask(__name__)
 # Enable CORS for cross-origin requests
 CORS(app)
@@ -31,6 +29,7 @@ def extract_text_from_pdf(pdf_path):
     return text
 
 def analyze_resume_vs_jd(resume_text, jd_text):
+    client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
     prompt = f"""
     You are an expert ATS (Applicant Tracking System) and Career Coach.
     
