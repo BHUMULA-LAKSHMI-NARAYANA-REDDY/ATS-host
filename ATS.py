@@ -7,8 +7,8 @@ import PyPDF2
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-# Note: The API key should ideally be in an environment variable
-client = genai.Client(api_key="YOUR API")
+
+client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
 app = Flask(__name__)
 # Enable CORS for cross-origin requests
@@ -89,4 +89,4 @@ def analyze():
     })
 
 if __name__ == "__main__":
-    app.run(debug=True, port=8080)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
